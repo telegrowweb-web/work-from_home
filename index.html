@@ -32,7 +32,7 @@
             position: absolute;
             width: 100vw;
             height: 100vw;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.03) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.04) 0%, transparent 70%);
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             filter: blur(80px);
@@ -48,39 +48,58 @@
         .primary-btn {
             background: linear-gradient(135deg, #f3d97d 0%, #d9b244 100%);
             color: #000;
-            font-weight: 700;
+            font-weight: 800;
             border-radius: 50px;
             box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .primary-btn:hover {
-            transform: scale(1.05);
+            transform: scale(1.05) translateY(-2px);
             box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
         }
 
         .glass-card {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
             border-radius: 24px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            transition: all 0.3s ease;
         }
 
-        /* Responsive UI fixes */
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+        /* Entrance Animation */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; opacity: 0; }
+        .delay-2 { animation-delay: 0.4s; opacity: 0; }
+        .delay-3 { animation-delay: 0.6s; opacity: 0; }
+
         @media (max-width: 768px) {
-            .hero-title { font-size: 2.5rem !important; }
+            .hero-title { font-size: 2.8rem !important; line-height: 1.1; }
             .service-grid { 
                 grid-template-columns: 1fr !important; 
-                gap: 0.5rem !important;
-                width: 90% !important;
+                gap: 12px !important;
+                margin-top: 10px;
             }
-            .glass-card { padding: 0.75rem !important; }
-            .card-text { display: none; } /* Mobile par card text hide kiya for space */
-            .card-title { margin-bottom: 0 !important; font-size: 0.9rem !important; }
+            .glass-card { padding: 12px !important; }
+            .card-text { font-size: 11px !important; display: block !important; color: #777; }
+            .card-title { font-size: 1rem !important; margin-bottom: 2px !important; }
+            main { padding-top: 2rem !important; padding-bottom: 1rem !important; }
+            .cta-area { margin-bottom: 2rem !important; }
         }
     </style>
 </head>
@@ -88,59 +107,59 @@
 
     <div class="bg-canvas"><div class="glow"></div></div>
 
-    <main class="h-screen w-full max-w-6xl mx-auto px-6 flex flex-col items-center justify-between py-6 md:py-10">
+    <main class="h-screen w-full max-w-6xl mx-auto px-6 flex flex-col items-center justify-between py-10 md:py-16">
         
-        <header class="w-full flex justify-center">
-            <div class="relative">
-                <div class="absolute inset-0 bg-yellow-600/10 blur-2xl rounded-full"></div>
+        <header class="w-full flex justify-center reveal">
+            <div class="relative group">
+                <div class="absolute inset-0 bg-yellow-600/20 blur-3xl rounded-full group-hover:bg-yellow-600/40 transition-all"></div>
                 <img src="https://academylinkx.site/wp-content/uploads/2026/03/a-professional-logo-design-featuring-the_MAzJyQyRSKS8U0adzmrMVA_0dqVqgMPSpWz84PUomy5EA_cover_sd-1.jpeg" 
-                     alt="Logo" 
-                     class="relative w-20 h-20 md:w-24 md:h-24 rounded-full border border-white/10 shadow-2xl">
+                     alt="NexGroww Logo" 
+                     class="relative w-24 h-24 md:w-32 md:h-32 rounded-full border-2 border-white/5 shadow-2xl">
             </div>
         </header>
 
-        <section class="flex flex-col items-center text-center flex-grow justify-center">
-            <div class="bg-yellow-600/10 border border-yellow-600/20 text-yellow-500/80 px-5 py-1 rounded-full text-[10px] md:text-xs tracking-[0.25em] uppercase font-bold mb-6">
+        <section class="flex flex-col items-center text-center reveal delay-1 cta-area">
+            <div class="bg-yellow-600/10 border border-yellow-600/20 text-yellow-500/90 px-6 py-1.5 rounded-full text-[10px] md:text-xs tracking-[0.3em] uppercase font-black mb-8">
                 Next Generation Agency
             </div>
             
-            <h1 class="hero-title text-5xl md:text-8xl font-bold gold-text mb-6 leading-tight">
+            <h1 class="hero-title text-6xl md:text-8xl font-bold gold-text mb-6 leading-tight tracking-tight">
                 Scale Your Digital <br> <span class="italic font-normal">Empire</span>
             </h1>
             
-            <p class="max-w-md md:max-w-2xl text-gray-400 text-sm md:text-xl mb-10 leading-relaxed">
-                We design premium systems that transform your brand into a high-performance revenue machine.
+            <p class="max-w-md md:max-w-2xl text-gray-400 text-sm md:text-xl mb-10 leading-relaxed font-light">
+                We design premium systems that transform your brand into a <span class="text-white font-semibold">high-performance revenue machine.</span>
             </p>
             
-            <div class="flex flex-col sm:flex-row gap-4 w-full justify-center px-4">
-                <a href="https://wa.me/message/Y34XAGOLDWSUK1" class="primary-btn px-10 py-4 text-sm md:text-lg">
+            <div class="w-full flex justify-center">
+                <a href="https://wa.me/message/Y34XAGOLDWSUK1" class="primary-btn px-12 py-5 text-sm md:text-lg">
                     Book Free Consultation
                 </a>
             </div>
         </section>
 
-        <section class="w-full flex flex-col items-center gap-6">
-            <div class="service-grid grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
-                <div class="glass-card p-5 border-t border-yellow-600/20">
-                    <h3 class="card-title text-yellow-500 font-bold text-lg mb-1">Passive Income</h3>
-                    <p class="card-text text-gray-500 text-xs">Automated workflows 24/7.</p>
+        <section class="w-full flex flex-col items-center gap-8 reveal delay-2">
+            <div class="service-grid grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+                <div class="glass-card p-6 text-center border-t border-yellow-600/30">
+                    <h3 class="card-title text-yellow-500 font-bold text-xl mb-2">Passive Income</h3>
+                    <p class="card-text text-gray-500 text-xs md:text-sm">Automated workflows 24/7.</p>
                 </div>
-                <div class="glass-card p-5 border-t border-yellow-600/20">
-                    <h3 class="card-title text-yellow-500 font-bold text-lg mb-1">Remote Freedom</h3>
-                    <p class="card-text text-gray-500 text-xs">Work from anywhere.</p>
+                <div class="glass-card p-6 text-center border-t border-yellow-600/30">
+                    <h3 class="card-title text-yellow-500 font-bold text-xl mb-2">Remote Freedom</h3>
+                    <p class="card-text text-gray-500 text-xs md:text-sm">Work from anywhere.</p>
                 </div>
-                <div class="glass-card p-5 border-t border-yellow-600/20">
-                    <h3 class="card-title text-yellow-500 font-bold text-lg mb-1">Elite Growth</h3>
-                    <p class="card-text text-gray-500 text-xs">Rapid scaling strategies.</p>
+                <div class="glass-card p-6 text-center border-t border-yellow-600/30">
+                    <h3 class="card-title text-yellow-500 font-bold text-xl mb-2">Elite Growth</h3>
+                    <p class="card-text text-gray-500 text-xs md:text-sm">Rapid scaling strategies.</p>
                 </div>
             </div>
 
-            <footer class="flex flex-col items-center">
-                <a href="https://telegram.me/+TRlJl628l-FkMWE9" target="_blank" class="flex items-center gap-3 bg-white/5 px-6 py-2 rounded-full border border-white/10 hover:border-yellow-600/30 transition-all">
-                    <span class="text-gray-500 text-[9px] tracking-widest uppercase">Ads Managed by</span>
-                    <span style="color:#D4AF37; font-weight:700; font-size:13px">@Nexgroww_agency</span>
+            <footer class="flex flex-col items-center pb-2 reveal delay-3">
+                <a href="https://telegram.me/+TRlJl628l-FkMWE9" target="_blank" class="group flex items-center gap-3 bg-white/5 px-8 py-3 rounded-full border border-white/10 hover:border-yellow-600/40 transition-all">
+                    <span class="text-gray-500 text-[10px] tracking-[0.2em] uppercase group-hover:text-gray-300">Managed by</span>
+                    <span style="color:#D4AF37; font-weight:800; font-size:14px">@Nexgroww_agency</span>
                 </a>
-                <p class="text-gray-700 text-[9px] mt-4 tracking-[0.4em] uppercase">© 2026 NEXGROWW DIGITAL SERVICES</p>
+                <p class="text-gray-700 text-[9px] mt-6 tracking-[0.5em] uppercase font-bold">© 2026 NEXGROWW DIGITAL</p>
             </footer>
         </section>
 
