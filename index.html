@@ -1,271 +1,393 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Academy Link X – Work From Home</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Academy Link X – Work From Home | Ghar Se Kamao</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;700;900&family=Baloo+2:wght@700;800&display=swap');
 
-        body, html {
-            width: 100%; height: 100%;
-            background: #0a0a0a;
-            font-family: 'Nunito', sans-serif;
-            color: #fff;
-            overflow: hidden;
-            position: fixed;
-        }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 
-        .page {
-            width: 100%; height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px 20px 16px;
-            position: relative;
-            overflow: hidden;
-        }
+    :root{
+      --grn:#25D366;
+      --grn2:#5dde8a;
+      --grn3:#b2f5cc;
+      --grn4:#0d6b35;
+      --teal:#128C7E;
+      --yel:#ffd700;
+      --dark:#040a06;
+      --bdr:rgba(37,211,102,0.20);
+      --txt:#e8f5eb;
+    }
 
-        .page::before {
-            content: '';
-            position: absolute;
-            top: -80px; left: 50%;
-            transform: translateX(-50%);
-            width: 320px; height: 320px;
-            background: radial-gradient(circle, rgba(37,211,102,0.15) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        .page::after {
-            content: '';
-            position: absolute;
-            bottom: -60px; left: 50%;
-            transform: translateX(-50%);
-            width: 260px; height: 260px;
-            background: radial-gradient(circle, rgba(18,140,126,0.12) 0%, transparent 70%);
-            pointer-events: none;
-        }
+    html,body{
+      height:100%;width:100%;
+      background:var(--dark);
+      font-family:'Rajdhani',sans-serif;
+      color:var(--txt);
+      overflow:hidden;
+      position:fixed;
+    }
 
-        .top {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            z-index: 1;
-        }
+    /* BG */
+    .bg{position:fixed;inset:0;z-index:0;pointer-events:none;
+      background:
+        radial-gradient(ellipse at 15% 10%,rgba(37,211,102,0.13) 0%,transparent 48%),
+        radial-gradient(ellipse at 85% 90%,rgba(18,140,126,0.10) 0%,transparent 48%),
+        radial-gradient(ellipse at 50% 50%,rgba(4,10,6,0.97) 0%,transparent 70%);
+    }
 
-        .logo-ring {
-            width: 72px; height: 72px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            padding: 3px;
-            box-shadow: 0 0 0 6px rgba(37,211,102,0.1);
-        }
-        .logo-ring img {
-            width: 100%; height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #0a0a0a;
-            display: block;
-        }
+    .grid{position:fixed;inset:0;z-index:0;pointer-events:none;
+      background-image:
+        radial-gradient(circle,rgba(37,211,102,0.06) 1px,transparent 1px),
+        radial-gradient(circle,rgba(37,211,102,0.03) 1px,transparent 1px);
+      background-size:28px 28px,14px 14px;
+      background-position:0 0,7px 7px;
+      animation:gridDrift 30s linear infinite;
+    }
+    @keyframes gridDrift{0%{background-position:0 0,7px 7px}100%{background-position:28px 28px,35px 35px}}
 
-        .badge {
-            background: rgba(37,211,102,0.12);
-            border: 1px solid rgba(37,211,102,0.35);
-            color: #25D366;
-            font-size: 0.65rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            padding: 4px 14px;
-            border-radius: 50px;
-        }
+    .diag{position:fixed;inset:0;z-index:0;pointer-events:none;
+      background-image:repeating-linear-gradient(-45deg,transparent,transparent 42px,rgba(37,211,102,0.018) 42px,rgba(37,211,102,0.018) 43px);
+    }
 
-        .middle {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            z-index: 1;
-            width: 100%;
-        }
+    .top-bar{position:fixed;top:0;left:0;right:0;height:2px;
+      background:linear-gradient(90deg,transparent,var(--grn4),var(--grn),var(--grn2),var(--grn3),var(--grn2),var(--grn),var(--grn4),transparent);
+      background-size:300% auto;
+      animation:barFlow 4s linear infinite;z-index:100;
+    }
+    @keyframes barFlow{0%{background-position:0% center}100%{background-position:300% center}}
 
-        h1 {
-            font-family: 'Baloo 2', cursive;
-            font-size: clamp(1.6rem, 7vw, 2.4rem);
-            font-weight: 800;
-            line-height: 1.15;
-            text-align: center;
-        }
+    .scan{position:fixed;left:0;right:0;height:1px;
+      background:linear-gradient(90deg,transparent,rgba(37,211,102,0.45),rgba(18,140,126,0.25),transparent);
+      z-index:0;pointer-events:none;
+      animation:scanMove 12s linear infinite;
+    }
+    @keyframes scanMove{0%{top:2px;opacity:0}5%{opacity:1}95%{opacity:.2}100%{top:100%;opacity:0}}
 
-        h1 span {
-            -webkit-text-fill-color: transparent;
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            -webkit-background-clip: text;
-        }
+    .orb{position:fixed;border-radius:50%;filter:blur(90px);z-index:0;pointer-events:none;}
+    .orb1{width:340px;height:340px;background:rgba(37,211,102,0.10);top:-100px;right:-80px;animation:orbF 13s ease-in-out infinite alternate;}
+    .orb2{width:260px;height:260px;background:rgba(18,140,126,0.08);bottom:-80px;left:-60px;animation:orbF 16s ease-in-out infinite alternate-reverse;}
+    .orb3{width:180px;height:180px;background:rgba(255,215,0,0.05);top:40%;right:-40px;animation:orbF 10s ease-in-out infinite alternate;}
+    @keyframes orbF{0%{transform:translate(0,0) scale(1)}100%{transform:translate(14px,18px) scale(1.08)}}
 
-        .desc {
-            font-size: 0.82rem;
-            color: #888;
-            text-align: center;
-            line-height: 1.6;
-            max-width: 300px;
-        }
+    .particles{position:fixed;inset:0;z-index:0;pointer-events:none;}
+    .p{position:absolute;border-radius:50%;animation:pUp linear infinite;opacity:0;}
+    .p1{width:2px;height:2px;background:var(--grn);left:6%;top:22%;animation-duration:8s;animation-delay:0s;}
+    .p2{width:2px;height:2px;background:var(--grn2);left:18%;top:65%;animation-duration:10s;animation-delay:1s;}
+    .p3{width:3px;height:3px;background:var(--grn3);left:30%;top:35%;animation-duration:9s;animation-delay:2s;}
+    .p4{width:2px;height:2px;background:var(--teal);left:48%;top:75%;animation-duration:11s;animation-delay:.5s;}
+    .p5{width:2px;height:2px;background:var(--yel);left:64%;top:18%;animation-duration:8.5s;animation-delay:3s;}
+    .p6{width:2px;height:2px;background:var(--grn2);left:76%;top:80%;animation-duration:10s;animation-delay:1.5s;}
+    .p7{width:3px;height:3px;background:var(--grn);left:87%;top:44%;animation-duration:9s;animation-delay:2.5s;}
+    .p8{width:2px;height:2px;background:var(--teal);left:94%;top:28%;animation-duration:11s;animation-delay:0s;}
+    @keyframes pUp{0%{opacity:0;transform:translateY(0) scale(.5)}20%{opacity:.7}80%{opacity:.3}100%{opacity:0;transform:translateY(-65px) scale(1.2)}}
 
-        .stats {
-            display: flex;
-            gap: 10px;
-            width: 100%;
-            max-width: 360px;
-        }
+    /* PAGE */
+    .page{
+      position:relative;z-index:1;
+      height:100vh;
+      display:flex;flex-direction:column;
+      align-items:center;justify-content:center;
+      padding:18px 22px 24px;
+      overflow:hidden;gap:0;
+    }
 
-        .stat {
-            flex: 1;
-            background: #111;
-            border: 1px solid #1e1e1e;
-            border-radius: 14px;
-            padding: 12px 8px;
-            text-align: center;
-        }
+    /* HEADER */
+    .hdr{display:flex;align-items:center;gap:8px;margin-bottom:11px;animation:fadeUp .5s ease both;}
+    .hdr-line{flex:1;height:1px;max-width:44px;background:linear-gradient(90deg,transparent,var(--grn),transparent);}
+    .hdr-txt{font-size:8.5px;font-weight:700;letter-spacing:.40em;color:var(--grn2);text-transform:uppercase;opacity:.85;white-space:nowrap;font-family:'Orbitron',monospace;}
 
-        .stat b {
-            display: block;
-            font-family: 'Baloo 2', cursive;
-            font-size: 1.2rem;
-            color: #25D366;
-            line-height: 1;
-            margin-bottom: 4px;
-        }
+    /* LOGO */
+    .logo-link{text-decoration:none;display:block;}
+    .logo-section{display:flex;flex-direction:column;align-items:center;animation:fadeUp .5s .06s ease both;}
+    .logo-outer{position:relative;width:110px;height:110px;}
 
-        .stat span {
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #555;
-        }
+    .lr1{position:absolute;inset:-7px;border-radius:50%;
+      border:2px solid transparent;
+      background:linear-gradient(var(--dark),var(--dark)) padding-box,
+        conic-gradient(var(--grn4) 0%,var(--grn) 20%,var(--grn3) 40%,var(--yel) 58%,var(--grn) 78%,var(--grn4) 100%) border-box;
+      animation:rSpin 6s linear infinite;
+    }
+    .lr2{position:absolute;inset:-15px;border-radius:50%;border:1px solid rgba(37,211,102,0.15);animation:rSpin 11s linear infinite reverse;}
+    .lr3{position:absolute;inset:-24px;border-radius:50%;border:1px dashed rgba(37,211,102,0.07);animation:rSpin 17s linear infinite;}
+    @keyframes rSpin{to{transform:rotate(360deg)}}
 
-        .bottom {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            width: 100%;
-            z-index: 1;
-        }
+    .l-img{position:absolute;inset:0;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#071008;}
+    .l-img img{width:100%;height:100%;object-fit:cover;}
 
-        .btn-wa {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            max-width: 340px;
-            padding: 16px 20px;
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: #fff;
-            font-size: 0.95rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-radius: 14px;
-            text-decoration: none;
-            box-shadow: 0 8px 28px rgba(37,211,102,0.3);
-            animation: zoomPulse 2s infinite ease-in-out;
-        }
+    .ldot{position:absolute;width:6px;height:6px;border-radius:50%;}
+    .ld1{top:-2px;left:50%;transform:translateX(-50%);background:var(--grn);box-shadow:0 0 8px var(--grn);}
+    .ld2{bottom:-2px;left:50%;transform:translateX(-50%);background:var(--grn);box-shadow:0 0 8px var(--grn);}
+    .ld3{left:-2px;top:50%;transform:translateY(-50%);background:var(--yel);box-shadow:0 0 8px var(--yel);}
+    .ld4{right:-2px;top:50%;transform:translateY(-50%);background:var(--yel);box-shadow:0 0 8px var(--yel);}
 
-        .btn-wa svg { width: 20px; height: 20px; flex-shrink: 0; }
+    .ai-badge{position:absolute;bottom:2px;right:2px;width:28px;height:28px;border-radius:50%;
+      background:linear-gradient(135deg,var(--grn4),var(--grn));
+      display:flex;align-items:center;justify-content:center;
+      font-size:12px;border:2px solid var(--dark);z-index:3;
+      box-shadow:0 2px 12px rgba(37,211,102,.7);}
 
-        @keyframes zoomPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-        }
+    .name-row{margin-top:10px;display:flex;align-items:center;gap:6px;}
+    .nr-line{width:20px;height:1px;}
+    .nl1{background:linear-gradient(90deg,transparent,var(--grn));}
+    .nl2{background:linear-gradient(90deg,var(--grn),transparent);}
+    .nr-txt{font-size:8px;font-weight:700;letter-spacing:.22em;color:rgba(37,211,102,.45);text-transform:uppercase;font-family:'Orbitron',monospace;}
 
-        .live {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.7rem;
-            color: #444;
-        }
+    /* TITLE */
+    .title-wrap{text-align:center;margin-top:10px;animation:fadeUp .5s .14s ease both;}
+    .pre-lbl{font-size:8px;font-weight:500;letter-spacing:.38em;color:rgba(255,255,255,.22);text-transform:uppercase;margin-bottom:4px;}
+    h1{font-size:clamp(20px,6.2vw,48px);font-weight:900;letter-spacing:.05em;line-height:1.05;color:#fff;font-family:'Baloo 2',cursive;}
+    h1 .gr{
+      background:linear-gradient(180deg,var(--grn3) 0%,var(--grn) 50%,var(--grn4) 100%);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      filter:drop-shadow(0 0 14px rgba(37,211,102,.6));
+    }
+    h1 .rest{color:rgba(255,255,255,.85);}
+    .sub-head{font-size:clamp(7.5px,1.8vw,10px);font-weight:600;letter-spacing:.26em;color:rgba(255,255,255,.26);text-transform:uppercase;margin-top:5px;font-family:'Orbitron',monospace;}
 
-        .dot {
-            width: 7px; height: 7px;
-            background: #25D366;
-            border-radius: 50%;
-            animation: pulse 1.5s infinite;
-        }
+    /* BANNER */
+    .ai-banner{
+      display:flex;align-items:center;gap:10px;
+      background:rgba(37,211,102,.07);
+      border:1px solid var(--bdr);
+      border-radius:10px;padding:9px 16px;
+      width:100%;max-width:340px;
+      margin-top:11px;
+      animation:fadeUp .5s .22s ease both;
+      position:relative;overflow:hidden;
+    }
+    .ai-banner::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+      background:linear-gradient(90deg,transparent,var(--grn),var(--yel),transparent);}
+    .ab-icon{font-size:22px;flex-shrink:0;}
+    .ab-txt{flex:1;}
+    .ab-txt b{display:block;font-size:11.5px;font-weight:800;color:var(--grn2);letter-spacing:.03em;font-family:'Baloo 2',cursive;}
+    .ab-txt span{font-size:9.5px;color:rgba(255,255,255,.28);font-weight:400;}
+    .ab-live{display:flex;align-items:center;gap:4px;flex-shrink:0;}
+    .ab-dot{width:7px;height:7px;border-radius:50%;background:var(--grn);box-shadow:0 0 8px var(--grn);animation:dotBlink 1.4s ease-in-out infinite;}
+    @keyframes dotBlink{0%,100%{opacity:1}50%{opacity:.3}}
+    .ab-live-txt{font-size:9px;font-weight:700;color:var(--grn2);letter-spacing:.08em;font-family:'Orbitron',monospace;}
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.3; transform: scale(1.5); }
-        }
+    /* FEATURE CARDS */
+    .feat-grid{
+      display:grid;grid-template-columns:repeat(3,1fr);
+      gap:7px;width:100%;max-width:340px;
+      margin-top:11px;
+      animation:fadeUp .5s .30s ease both;
+    }
+    .fc{
+      background:rgba(37,211,102,.06);
+      border:1px solid rgba(37,211,102,.15);
+      border-radius:10px;padding:10px 5px;text-align:center;
+      position:relative;overflow:hidden;
+    }
+    .fc::before{content:'';position:absolute;bottom:0;left:0;right:0;height:1.5px;
+      background:linear-gradient(90deg,transparent,var(--grn),transparent);}
+    .fc-icon{font-size:18px;display:block;margin-bottom:3px;}
+    .fc-lbl{font-size:7.5px;font-weight:700;color:rgba(255,255,255,.30);text-transform:uppercase;letter-spacing:.07em;line-height:1.3;font-family:'Orbitron',monospace;}
 
-        .footer-txt {
-            font-size: 0.62rem;
-            color: #333;
-            text-align: center;
-        }
+    /* STATS */
+    .stats-row{
+      display:flex;align-items:stretch;
+      background:rgba(37,211,102,.05);
+      border:1px solid var(--bdr);
+      border-radius:11px;overflow:hidden;
+      width:100%;max-width:340px;
+      margin-top:11px;
+      animation:fadeUp .5s .38s ease both;
+    }
+    .sc{flex:1;padding:9px 5px;text-align:center;position:relative;}
+    .sc+.sc::before{content:'';position:absolute;left:0;top:15%;bottom:15%;width:1px;background:var(--bdr);}
+    .sc-v{font-size:16px;font-weight:900;line-height:1;letter-spacing:.03em;font-family:'Baloo 2',cursive;}
+    .sv-g{color:var(--grn2);}
+    .sv-y{color:#ffd700;}
+    .sv-w{color:#fff;}
+    .sc-l{font-size:7px;font-weight:700;color:rgba(255,255,255,.22);text-transform:uppercase;letter-spacing:.1em;margin-top:2px;font-family:'Orbitron',monospace;}
 
-        .footer-txt a { color: #25D366; text-decoration: none; font-weight: 700; }
-    </style>
+    /* INFO */
+    .info-row{
+      display:flex;align-items:center;gap:10px;
+      justify-content:center;width:100%;
+      margin-top:9px;flex-wrap:wrap;
+      animation:fadeUp .5s .44s ease both;
+    }
+    .info-item{display:flex;align-items:center;gap:4px;font-size:9.5px;font-weight:600;color:rgba(255,255,255,.22);}
+    .info-sep{width:3px;height:3px;border-radius:50%;background:var(--bdr);flex-shrink:0;}
+
+    /* CTA */
+    .cta-wrap{width:100%;max-width:340px;margin-top:13px;animation:fadeUp .5s .52s ease both;}
+    .btn{
+      position:relative;overflow:hidden;
+      display:flex;align-items:center;justify-content:center;gap:10px;
+      width:100%;padding:15px 28px;border-radius:10px;
+      background:linear-gradient(135deg,var(--grn4),var(--grn),var(--grn2),var(--teal));
+      background-size:200% auto;color:#fff;
+      font-family:'Baloo 2',cursive;
+      font-weight:800;font-size:14px;letter-spacing:.10em;
+      text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;
+      box-shadow:0 6px 28px rgba(37,211,102,.40);
+      animation:btnPulse 2.4s ease-in-out infinite,gSlide 3.5s linear infinite;
+    }
+    .btn::before{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);
+      transform:translateX(-100%);animation:shimmer 2.6s ease-in-out infinite;
+    }
+    @keyframes shimmer{0%{transform:translateX(-100%)}55%,100%{transform:translateX(100%)}}
+    @keyframes btnPulse{
+      0%,100%{transform:scale(1);box-shadow:0 6px 28px rgba(37,211,102,.40);}
+      50%{transform:scale(1.04);box-shadow:0 10px 38px rgba(37,211,102,.65);}
+    }
+    @keyframes gSlide{0%{background-position:0% center}100%{background-position:200% center}}
+    .btn-inner{position:relative;z-index:1;display:flex;align-items:center;gap:10px;}
+    .wa-icon{width:20px;height:20px;flex-shrink:0;}
+
+    .credit{position:fixed;bottom:9px;left:0;right:0;text-align:center;font-size:10px;color:rgba(255,255,255,.16);z-index:100;letter-spacing:.03em;}
+    .credit a{color:var(--grn);text-decoration:none;font-weight:700;}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+    @media(max-width:480px){
+      .page{padding:12px 16px 22px;}
+      .logo-outer{width:96px;height:96px;}
+      h1{font-size:clamp(18px,6.5vw,26px);}
+      .ai-banner,.feat-grid,.stats-row,.cta-wrap{max-width:100%;}
+      .btn{font-size:13px;padding:13px 16px;}
+    }
+
+    @media(min-width:768px){
+      .logo-outer{width:124px;height:124px;}
+      h1{font-size:52px;}
+      .ai-banner,.feat-grid,.stats-row,.cta-wrap{max-width:420px;}
+      .btn{font-size:15px;padding:16px 34px;}
+      .sc-v{font-size:20px;}
+    }
+  </style>
 </head>
 <body>
 
-<div class="page">
-
-    <div class="top">
-        <div class="logo-ring">
-            <img src="https://academylinkx.site/wp-content/uploads/2026/03/a-professional-logo-design-featuring-the_MAzJyQyRSKS8U0adzmrMVA_0dqVqgMPSpWz84PUomy5EA_cover_sd-1.jpeg" alt="Academy Link X">
-        </div>
-        <div class="badge">✦ Work From Home ✦</div>
-    </div>
-
-    <div class="middle">
-        <h1>Ghar Se Kamao<br><span>Apni Zindagi Badlo</span></h1>
-        <p class="desc">Sirf ek smartphone se shuru karo. No office, no boss — roz ₹500–₹5000 kamao. Free training ke saath!</p>
-
-        <div class="stats">
-            <div class="stat">
-                <b>₹5K+</b>
-                <span>Daily Earn</span>
-            </div>
-            <div class="stat">
-                <b>10K+</b>
-                <span>Members</span>
-            </div>
-            <div class="stat">
-                <b>FREE</b>
-                <span>Training</span>
-            </div>
-            <div class="stat">
-                <b>24/7</b>
-                <span>Support</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="bottom">
-        <a href="https://wa.me/qr/BOEXN7W67YGVG1" class="btn-wa">
-            <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-                <path d="M12 0C5.374 0 0 5.373 0 12c0 2.117.549 4.107 1.51 5.845L.057 23.143a.75.75 0 00.916.916l5.297-1.452A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75c-1.942 0-3.757-.524-5.312-1.438l-.38-.225-3.938 1.078 1.079-3.939-.226-.381A9.712 9.712 0 012.25 12C2.25 6.614 6.614 2.25 12 2.25S21.75 6.614 21.75 12 17.386 21.75 12 21.75z"/>
-            </svg>
-            JOIN WHATSAPP NOW
-        </a>
-
-        <div class="live">
-            <div class="dot"></div>
-            47 log abhi online hain
-        </div>
-
-        <p class="footer-txt">✦ 100% Genuine · Powered by <a href="https://telegram.me/+TRlJl628l-FkMWE9">Nexgroww Agency</a> ✦</p>
-    </div>
-
+<div class="top-bar"></div>
+<div class="bg"></div>
+<div class="grid"></div>
+<div class="diag"></div>
+<div class="scan"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+<div class="particles">
+  <div class="p p1"></div><div class="p p2"></div><div class="p p3"></div>
+  <div class="p p4"></div><div class="p p5"></div><div class="p p6"></div>
+  <div class="p p7"></div><div class="p p8"></div>
 </div>
 
+<main class="page">
+
+  <!-- Header -->
+  <div class="hdr">
+    <div class="hdr-line"></div>
+    <div class="hdr-txt">💼 &nbsp; Work From Home &nbsp; 💼</div>
+    <div class="hdr-line"></div>
+  </div>
+
+  <!-- Logo -->
+  <a href="https://wa.me/qr/BOEXN7W67YGVG1" target="_blank" rel="noopener" class="logo-link">
+    <div class="logo-section">
+      <div class="logo-outer">
+        <div class="lr1"></div><div class="lr2"></div><div class="lr3"></div>
+        <div class="l-img">
+          <img
+            src="https://academylinkx.site/wp-content/uploads/2026/03/a-professional-logo-design-featuring-the_MAzJyQyRSKS8U0adzmrMVA_0dqVqgMPSpWz84PUomy5EA_cover_sd-1.jpeg"
+            alt="Academy Link X"
+            onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\'font-size:28px;font-weight:900;color:#25D366\'>ALX</span>'"
+          />
+        </div>
+        <div class="ldot ld1"></div><div class="ldot ld2"></div>
+        <div class="ldot ld3"></div><div class="ldot ld4"></div>
+        <div class="ai-badge">💰</div>
+      </div>
+      <div class="name-row">
+        <div class="nr-line nl1"></div>
+        <span class="nr-txt">Academy Link X</span>
+        <div class="nr-line nl2"></div>
+      </div>
+    </div>
+  </a>
+
+  <!-- Title -->
+  <div class="title-wrap">
+    <div class="pre-lbl">— Ghar Se Kamao —</div>
+    <h1>
+      <span class="gr">APNI ZINDAGI</span><br/>
+      <span class="rest" style="font-size:.62em;letter-spacing:.03em;">Badlo — Work From Home</span>
+    </h1>
+    <div class="sub-head">Smartphone · No Boss · ₹500–₹5000 Daily</div>
+  </div>
+
+  <!-- Banner -->
+  <div class="ai-banner">
+    <span class="ab-icon">🚀</span>
+    <div class="ab-txt">
+      <b>Free Training + Daily Earning</b>
+      <span>10K+ Members · 24/7 Support · 100% Genuine</span>
+    </div>
+    <div class="ab-live">
+      <div class="ab-dot"></div>
+      <span class="ab-live-txt">LIVE</span>
+    </div>
+  </div>
+
+  <!-- Feature Cards -->
+  <div class="feat-grid">
+    <div class="fc">
+      <span class="fc-icon">📱</span>
+      <span class="fc-lbl">Sirf<br/>Smartphone</span>
+    </div>
+    <div class="fc">
+      <span class="fc-icon">🎓</span>
+      <span class="fc-lbl">Free<br/>Training</span>
+    </div>
+    <div class="fc">
+      <span class="fc-icon">💸</span>
+      <span class="fc-lbl">₹5K+<br/>Daily Earn</span>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="sc"><div class="sc-v sv-g">₹5K+</div><div class="sc-l">Daily Earn</div></div>
+    <div class="sc"><div class="sc-v sv-y">10K+</div><div class="sc-l">Members</div></div>
+    <div class="sc"><div class="sc-v sv-g">FREE</div><div class="sc-l">Training</div></div>
+    <div class="sc"><div class="sc-v sv-w">24/7</div><div class="sc-l">Support</div></div>
+  </div>
+
+  <!-- Info -->
+  <div class="info-row">
+    <div class="info-item">✅ 100% Genuine</div>
+    <div class="info-sep"></div>
+    <div class="info-item">🏠 Work From Home</div>
+    <div class="info-sep"></div>
+    <div class="info-item">🔥 No Office No Boss</div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-wrap">
+    <a href="https://wa.me/qr/BOEXN7W67YGVG1" target="_blank" rel="noopener" class="btn">
+      <span class="btn-inner">
+        <svg class="wa-icon" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 0C5.374 0 0 5.373 0 12c0 2.117.549 4.107 1.51 5.845L.057 23.143a.75.75 0 00.916.916l5.297-1.452A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75c-1.942 0-3.757-.524-5.312-1.438l-.38-.225-3.938 1.078 1.079-3.939-.226-.381A9.712 9.712 0 012.25 12C2.25 6.614 6.614 2.25 12 2.25S21.75 6.614 21.75 12 17.386 21.75 12 21.75z"/>
+        </svg>
+        Join WhatsApp — Free
+      </span>
+    </a>
+  </div>
+
+</main>
+
+<p class="credit">Powered by <a href="https://telegram.me/+TRlJl628l-FkMWE9" target="_blank" rel="noopener">Nexgroww Agency</a> &nbsp;·&nbsp; 47 log abhi online hain 🟢</p>
+
+<!-- Facebook Pixel -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init','1212005730730523');fbq('track','PageView');
